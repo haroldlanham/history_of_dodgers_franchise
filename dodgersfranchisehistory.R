@@ -8,6 +8,9 @@ library(ggplot2)
 library(gganimate)
 library(tidyverse)
 library(dplyr)
+library(hrbrthemes)
+library(viridis)
+library(viridisLite)
 
 fh <- read_csv("https://github.com/haroldlanham/history_of_dodgers_franchise/raw/main/dodgers_full_franchise_record.csv")
 
@@ -15,8 +18,18 @@ hitting <- read_csv("https://github.com/haroldlanham/history_of_dodgers_franchis
 
 pitching <- read_csv("https://github.com/haroldlanham/history_of_dodgers_franchise/raw/main/dodgers_pitching.csv")
 
-# Bubble plot
-ggplot(hitting, aes(x=BB, y=AB, size = Year)) +
-  geom_point(alpha=0.3)
+# Bubble plot please work
+hitting %>%
+  arrange(desc(Year)) %>%
+  mutate(BB = BB/AB)
+ggplot(hitting, aes(x=BB, y=AB, size = Year, color = OPS)) +
+  geom_point(alpha=0.5, color="blue") +
+  scale_size(range = c(.1, 5), name="Batting") +
+  scale_color_ft() +
+  theme_ipsum() +
+  theme(legend.position="bottom") +
+  ylab("AB") +
+  xlab("BB") +
+  theme(legend.position = "none")
 
 ggsave("dodgersbatting.pdf")
