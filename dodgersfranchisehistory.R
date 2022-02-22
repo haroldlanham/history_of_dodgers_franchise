@@ -9,12 +9,14 @@ library(gganimate)
 library(tidyverse)
 library(dplyr)
 
+fh <- read_csv("https://github.com/haroldlanham/history_of_dodgers_franchise/raw/main/dodgers_full_franchise_record.csv")
 
 hitting <- read_csv("https://github.com/haroldlanham/history_of_dodgers_franchise/raw/main/dodgers_hitting.csv")
- 
 
-# Most basic bubble plot
+pitching <- read_csv("https://github.com/haroldlanham/history_of_dodgers_franchise/raw/main/dodgers_pitching.csv")
+
+# Bubble plot
 ggplot(hitting, aes(x=BB, y=AB, size = Year)) +
-  geom_point(alpha=0.7)
+  geom_point(alpha=0.3)
 
 ggsave("dodgersbatting.pdf")
