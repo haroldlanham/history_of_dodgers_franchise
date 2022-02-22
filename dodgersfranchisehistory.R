@@ -32,4 +32,14 @@ ggplot(hitting, aes(x=BB, y=AB, size = Year, color = OPS)) +
   xlab("BB") +
   theme(legend.position = "none")
 
-ggsave("dodgersbatting.pdf")
+labs(title = 'Year: {frame_time}', 
+     x = 'BB', 
+     y = 'AB') +
+  transition_time(Year) +
+  ease_aes('linear')
+
+print(summary(fh))
+print(summary(hitting))
+print(summary(pitching))
+
+anim_save(animation = p, "hitting.gif")
