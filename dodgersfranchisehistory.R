@@ -30,7 +30,7 @@ ggplot(fh, aes(x=W, y=L, size = Year, color = W_L)) +
   theme(legend.position="bottom") +
   ylab("L") +
   xlab("W") +
-  theme(legend.position = "none")
+  theme(legend.position = "bottom")
 
 labs(title = 'Year: {frame_time}', 
      x = 'W', 
