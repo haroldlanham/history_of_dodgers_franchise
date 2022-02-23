@@ -27,10 +27,10 @@ ggplot(fh, aes(x=W, y=L, size = Year, color = W_L)) +
   scale_size(range = c(.1, 5), name="Wins_Losses") +
   scale_color_ft() +
   theme_ipsum() +
-  theme(legend.position="bottom") +
+  theme(legend.position="right") +
   ylab("L") +
   xlab("W") +
-  theme(legend.position = "bottom")
+  theme(legend.position = "right")
 
 labs(title = 'Year: {frame_time}', 
      x = 'W', 
