@@ -22,25 +22,35 @@ pitching <- read_csv("https://github.com/haroldlanham/history_of_dodgers_franchi
 fh %>%
   arrange(desc(Year)) %>%
   mutate(W_L = W/L)
-ggplot(fh, aes(x=W, y=L, size = Year, color = W_L)) +
+
+p <- ggplot(fh, aes(x=W, y=L, size = W_L, color = Lg
+)) + # give the plot a name at the beginning of this line, I chose "anim"
   geom_point(alpha=0.5, color="dodgerblue4") +
   scale_size(range = c(.1, 5), name="Wins_Losses") +
-  scale_color_ft() +
-  scale_fill_gradient()
-  theme_ipsum() +
+  # scale_color_ft() + # not relevant bc you set the color directly
+  # scale_fill_gradient()+ # not relevant because you don't have a fill aesthetic
+  theme_ipsum() + # all these lines (31-35 and the labs statements) should be part of making anim
   theme(legend.position="right") +
-  ylab("L") +
-  xlab("W") +
-  theme(legend.position = "right")
+  # ylab("L") + # these are redundant bc included in the labs() stmt below
+  # xlab("W") +
+  labs(#title = 'Year: {frame_time}', 
+    x = 'W', 
+    y = 'L')
 
-labs(title = 'Year: {frame_time}', 
-     x = 'W', 
-     y = 'L') +
+# end of the static graph; other stuff goes in an anim 
+# (these can also be combined, many tutorials do)
+
+anim <- p +
   transition_time(Year) +
-  ease_aes('linear')
+  labs(title = 'Year: {frame_time}')
+ease_aes('elastic')
 
-print(summary(fh))
-print(summary(hitting))
-print(summary(pitching))
+# print(summary(fh))
+# print(summary(hitting))
+# print(summary(pitching))
 
-anim_save(animation = p, "franchise_w_l.gif")
+animate(anim, nframes=nrow(fh), # the default is 100 frames but you want one frame per year.
+        renderer = gifski_renderer())
+anim_save('dodgers.gif')
+
+ggsave("dodgers.pdf")
