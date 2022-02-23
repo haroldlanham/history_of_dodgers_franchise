@@ -23,9 +23,10 @@ fh %>%
   arrange(desc(Year)) %>%
   mutate(W_L = W/L)
 ggplot(fh, aes(x=W, y=L, size = Year, color = W_L)) +
-  geom_point(alpha=0.5, color="blue") +
+  geom_point(alpha=0.5, color="dodgerblue4") +
   scale_size(range = c(.1, 5), name="Wins_Losses") +
   scale_color_ft() +
+  scale_fill_gradient()
   theme_ipsum() +
   theme(legend.position="right") +
   ylab("L") +
