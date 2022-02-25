@@ -34,8 +34,8 @@ p <- ggplot(fh, aes(x=W, y=L, size = W_L, color = Lg
   # ylab("L") + # these are redundant bc included in the labs() stmt below
   # xlab("W") +
   labs(#title = 'Year: {frame_time}', 
-    x = 'W', 
-    y = 'L')
+    x = 'Greater than .500', 
+    y = 'Less than .500')
 
 # end of the static graph; other stuff goes in an anim 
 # (these can also be combined, many tutorials do)
